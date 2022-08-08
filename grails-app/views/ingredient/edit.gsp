@@ -29,27 +29,7 @@
             <g:form resource="${this.ingredient}" method="PUT">
                 <g:hiddenField name="version" value="${this.ingredient?.version}" />
                 <fieldset class="form">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-1">
-                                <div class='fieldcontain required'>
-                                    <div>Name</div>
-                                    <span class='required-indicator'>*</span>
-                                    <g:textField name="name" value="${this.ingredient?.name}" />
-                                </div>
-                            </div>
-                            <div class="col-lg-auto">
-                                <div class='fieldcontain required'>
-                                    <h2>Description</h2>
-                                    <span class='required-indicator'>*</span>
-                                    <g:textArea name="description" @class = "form-control" value="${this.ingredient?.description}" rows="5" cols="160" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <f:all bean="ingredient"/>
-                        </div>
-                    </div>
+                    <f:all bean="ingredient"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

@@ -19,19 +19,19 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <div class="container">
+            <div class="container" >
                 <div class="row">
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                         <h2>${this.ingredient.name}</h2>
                         <img alt="${this.ingredient.name}" src="https://www.themealdb.com/images/ingredients/${this.ingredient.name}.png" width="150" height="150"/>
                     </div>
                     <div class="col-lg-auto">
                         <h2>Meal Menu Suggestions</h2>
+                        <a href="${suggestionUrl}">Click for Meal suggestions</a>
                     </div>
-
-                        <f:display bean="ingredient" />
                 </div>
             </div>
+            <f:display bean="ingredient" />
             <g:form resource="${this.ingredient}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${this.ingredient}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
