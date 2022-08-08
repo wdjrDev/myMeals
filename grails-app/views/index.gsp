@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Welcome to Grails</title>
+    <title>My Meals</title>
 </head>
 <body>
 <content tag="nav">
@@ -11,9 +11,7 @@
         <ul class="dropdown-menu">
             <li class="dropdown-item"><a href="#">Environment: ${grails.util.Environment.current.name}</a></li>
             <li class="dropdown-item"><a href="#">App profile: ${grailsApplication.config.grails?.profile}</a></li>
-            <li class="dropdown-item"><a href="#">App version:
-                <g:meta name="info.app.version"/></a>
-            </li>
+            <li class="dropdown-item"><a href="#">App version: <g:meta name="info.app.version"/></a></li>
             <li role="separator" class="dropdown-divider"></li>
             <li class="dropdown-item"><a href="#">Grails version:
                 <g:meta name="info.app.grailsVersion"/></a>
@@ -45,19 +43,18 @@
 
 <div class="svg" role="presentation">
     <div class="grails-logo-container">
-        <asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>
+        <asset:image src="groceries.svg"/>
     </div>
 </div>
 
 <div id="content" role="main">
     <section class="row colset-2-its">
-        <h1>Welcome to Grails</h1>
-
+        <h2>Welcome to My Meals</h2>
         <p>
-            Congratulations, you have successfully started your first Grails application! At the moment
-            this is the default page, feel free to modify it to either redirect to a controller or display
-            whatever content you may choose. Below is a list of controllers that are currently deployed in
-            this application, click on each to execute its default action:
+            Congratulations, you have successfully run the My Meals Application! We are still under construction,
+            so there will be many changes in the future. At the moment this is the default page. Below is a list
+            of controllers that are currently deployed in the application, click on each to execute its default
+            action; you can see what we have been up to from there. Please stop back and visit us soon!
         </p>
 
         <div id="controllers" role="navigation">
