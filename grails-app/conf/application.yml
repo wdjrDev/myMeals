@@ -26,6 +26,12 @@ endpoints:
     jmx:
         enabled: true
 
+theMealDb:
+    url: https://www.themealdb.com/api
+    data_type: json
+    version: v1
+    key: 1
+    filter_type: filter
 ---
 grails:
     mime:
@@ -131,3 +137,4 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+

@@ -1,30 +1,48 @@
 package mymeals
 
+import grails.config.Config
 import grails.validation.ValidationException
-
-import java.sql.Timestamp
-import java.time.LocalDateTime
-
 import static org.springframework.http.HttpStatus.*
+
 
 class IngredientController {
 
     IngredientService ingredientService
+    UrlBuilderService urlBuilderService
+   // AsyncMealSuggestionService mealSuggestionService
+    MealSuggestionService mealSuggestionService
+
+
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 5, 100)
-        respond ingredientService.list(params), model:[ingredientCount: ingredientService.count()]
+    def index(params) {
+        ArrayList<Ingredient> ingredientList=ingredientService.list(params)
+        return [ingredientList:ingredientList, count:ingredientService.count()]
+
+    }
+    def list(params){
+        ArrayList<Ingredient> ingredientList=ingredientService.list(params)
+        return ingredientList
     }
 
+    //@todo move the urlBuilderService out into the Meal Suggestion Service just pass the suggestionRequest bean to the gsp
     def show(Long id) {
-        Ingredient ingredient = ingredientService.get(id)
-        respond ingredientService.get(id)
+        Ingredient ingredient = Ingredient.get(id)
+        SuggestionRequest suggestionRequest = new SuggestionRequest()
+        suggestionRequest.setId(FilterEnum.INGREDIENT.id.toString())
+        suggestionRequest.setName(ingredient.name.toString())
+        suggestionRequest.setFilterName(FilterEnum.INGREDIENT.desc.toString())
+        println "suggestionRequest: id:${suggestionRequest.id} name: ${suggestionRequest.name} filterName: ${suggestionRequest.filterName} "
+        String url = urlBuilderService.getUrlBySuggestionRequest(suggestionRequest)
+        ArrayList mealList = mealSuggestionService.getMealDataByUrl(url)
+println("${mealList.collect()}")
+            //ArrayList<MealSuggestion>mealSuggestionList = mealSuggestionService.getMealSuggestions(url)
+        return [ingredient:ingredient, suggestionUrl:url]
     }
+
 
     def create() {
-        params.version="0.1"
         respond new Ingredient(params)
     }
 
@@ -35,7 +53,9 @@ class IngredientController {
         }
 
         try {
+            Config config = grailsApplication.config
             ingredient.lastUpdated = new Date().toTimestamp()
+            ingredient.version = config.getProperty('info.app.version',  "0.1")
             ingredientService.save(ingredient)
         } catch (ValidationException e) {
             respond ingredient.errors, view:'create'

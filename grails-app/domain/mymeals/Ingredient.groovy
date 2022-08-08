@@ -13,7 +13,7 @@ class Ingredient {
 
     static constraints ={
             id(nullable:false, unique: true, autoincrement:1)
-            name(size:3..30,nullable:false)
+            name(nullable:false, size:3..30)
             description(maxSize: 2500)
             type(size:0..30)
             version(nullable:false, size:1..5)
