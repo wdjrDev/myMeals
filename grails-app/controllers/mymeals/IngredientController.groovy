@@ -26,7 +26,6 @@ class IngredientController {
         return ingredientList
     }
 
-    //@todo move the urlBuilderService out into the Meal Suggestion Service just pass the suggestionRequest bean to the gsp
     def show(Long id) {
         Ingredient ingredient = Ingredient.get(id)
         SuggestionRequest suggestionRequest = new SuggestionRequest()
@@ -35,10 +34,8 @@ class IngredientController {
         suggestionRequest.setFilterName(FilterEnum.INGREDIENT.desc.toString())
         println "suggestionRequest: id:${suggestionRequest.id} name: ${suggestionRequest.name} filterName: ${suggestionRequest.filterName} "
         String url = urlBuilderService.getUrlBySuggestionRequest(suggestionRequest)
-        ArrayList mealList = mealSuggestionService.getMealDataByUrl(url)
-println("${mealList.collect()}")
-            //ArrayList<MealSuggestion>mealSuggestionList = mealSuggestionService.getMealSuggestions(url)
-        return [ingredient:ingredient, suggestionUrl:url]
+        ArrayList<MealSuggestion> mealSuggestions = mealSuggestionService.getMealSuggestionsByUrl(url)
+        return [ingredient:ingredient, mealSuggestions:mealSuggestions]
     }
 
 
