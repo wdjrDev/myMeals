@@ -17,25 +17,41 @@
         <div id="show-ingredient" class="content scaffold-show" role="main">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+                <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <div class="container" >
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p>${this.ingredient.name}</p>
-                        <p><img alt="${this.ingredient.name}" src="https://www.themealdb.com/images/ingredients/${this.ingredient.name}.png" width="200" height="200"/></p>
-                        <p>Type: ${this.ingredient.type}</p>
-                    </div>
-                    <div class="col-lg-auto">
-                        <g:if test="${mealSuggestions}">
-                            <g:each var="mealSuggestion" in="${mealSuggestions}">
-                                <a href="https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealSuggestion.idMeal}">
-                                    <p>${mealSuggestion.strMeal}</p>
-                                    <p><img alt="${mealSuggestion.strMeal}" src="${mealSuggestion.strMealThumb}" width="200" height="200"/></p>
-                                </a>
-                            </g:each>
-                        </g:if>
-                    </div>
+        </div>
+        <div class="container" >
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>${this.ingredient.name}</div>
+                    <img alt="${this.ingredient.name}" src="https://www.themealdb.com/images/ingredients/${this.ingredient.name}.png" width="200" height="200"/>
+                    <div>Type: ${this.ingredient.type}</div>
+                </div>
+                <g:if test="${mealSuggestions}">
+                    <g:each status="i" var="mealSuggestion" in="${mealSuggestions}">
+                        <div class="col-sm-3">
+                                <g:if test="${(i % 2) == 1}">
+                                    <br>
+                                        <a href="https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealSuggestion.idMeal}">
+                                            <div>${mealSuggestion.strMeal}</div>
+                                            <img alt="${mealSuggestion.strMeal}" src="${mealSuggestion.strMealThumb}" width="200" height="200"/>
+                                        </a>
+                                    </br>
+                                </g:if>
+                        </div>
+                        <div class="col-sm-3">
+                                <g:if test="${(i % 2) == 0}">
+                                    <br>
+                                        <a href="https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealSuggestion.idMeal}">
+                                            <div>${mealSuggestion.strMeal}</div>
+                                            <img alt="${mealSuggestion.strMeal}" src="${mealSuggestion.strMealThumb}" width="200" height="200"/>
+                                        </a>
+                                    </br>
+                                </g:if>
+                        </div>
+                    </g:each>
+                </g:if>
+                <div class="col-sm-auto">
                 </div>
             </div>
         </div>
